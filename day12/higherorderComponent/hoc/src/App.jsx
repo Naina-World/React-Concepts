@@ -1,16 +1,19 @@
 import { useState } from 'react'
 import Red from "./components/Red"
 import MessageBox from './components/MessageBox'
+import useInernetStatus from './hooks/useInternetStatus'
 
 
 function App() {
   const [count, setCount] = useState(0)
+  const internetConnected = useInernetStatus();
+
 
   return (
     <>
 
    
-<h2>REnder Function</h2>
+{/* <h2>REnder Function</h2>
          <MessageBox>
           {
             (ishappy)=>(
@@ -18,10 +21,12 @@ function App() {
             
           )
         }
-          </MessageBox>
+          </MessageBox> */}
          
 
-
+<header>
+  {internetConnected?'Internet is connected':'Internet is not connected'}
+</header>
 
 
     </>
