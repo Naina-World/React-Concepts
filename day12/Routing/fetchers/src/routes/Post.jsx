@@ -1,3 +1,4 @@
+import { useFetcher, useLoaderData } from "react-router-dom";
 export async function loader({params}){
     const post = {
         id: params.id,
@@ -8,16 +9,27 @@ export async function loader({params}){
 }
 
 export async function action({request}) {
-    
+    const formData = await request.formData();
+    const likePostID = formData.get('like');
+    console.log(`post ${likePostID} Liked`);
+    return {success : true};
 }
 
 export default function Post(){
     const post = useLoaderData()
-    const fetch = useFetcher()
+    const fetcher = useFetcher()
 
     return(
         <div>
-            {post.title}
+            <h2> {post.title}</h2>
+            <p>{post.likes}</p>
+            <fetcher.Form method = 'post'>
+                <button type="submit" name="like" value={post.id}> 
+                    Like
+                </button>
+
+            </fetcher.Form>
+            {fetcher.data?.success && <p> Like submitted </p> }
         </div>
     )
 
