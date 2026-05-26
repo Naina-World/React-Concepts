@@ -13,18 +13,19 @@ function Home() {
 
     const [searchParams, setSearchParams] = useSearchParams()
 
-    const query = searchParams.get("q") || "";
+    const query = searchParams.get("p") || "";
 
     useEffect(()=>{
         fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`).then((resp)=>
-            resp.json()).then((data) =>setRecipe(data.meals))
+            resp.json()).then((data) =>setRecipe(data.meals || []))
     } ,[query]);
+
   return (
     <div>
         <h2>
            Recipe App
         </h2>
-        <input value={query} onChange={(e)=>setSearchParams({q:e.target.value})} placeholder='Search Recipe' />
+        <input value={query} onChange={(e)=>setSearchParams({p:e.target.value})} placeholder='Search Recipe' />
 
         <ul>
             {recipe.map((meal)=>(
