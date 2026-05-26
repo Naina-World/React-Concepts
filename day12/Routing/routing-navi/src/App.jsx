@@ -11,10 +11,14 @@ import MainLayout from './components/MainLayout'
 import Home from './components/Home'
 import Data from './pages/Data'
 import GreetUser from './components/GreetUser'
+import Login from './components/Login'
+import Dashboard from './components/Dashboard'
+import ProtectedRoute from './components/ProtectedRoute'
 
 
 
 function App() {
+  const [isLoggedIn , setIsLoggedIn] =  useState(true);
 
 
   return (
@@ -29,11 +33,15 @@ function App() {
           <Route path='/page2' element={<Page2 />} />
 
           <Route path='/page3' element={<Page3 />} />
-          <Route path='data/:UserId?' element = {<Data/>}/>
-          <Route path='/greet' element = {<GreetUser/>}/>
-          <Route path='*' element = {<h2> 404 page not found </h2>}/>
+          <Route path='data/:UserId?' element={<Data />} />
+          <Route path='/greet' element={<GreetUser />} />
+          <Route path='*' element={<h2> 404 page not found </h2>} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/dashboard' element={<ProtectedRoute isLoggedIn={isLoggedIn}>
+            <Dashboard/>
+          </ProtectedRoute>} />
 
-       
+
 
 
         </Route>
