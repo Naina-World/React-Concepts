@@ -4,7 +4,7 @@ import './App.css'
 import styled from 'styled-components';
 
 const Naina = styled.button`
-background-color: blue;
+background-color: ${(props)=>(props.primary?'blue':'gray')};
 padding: 10px;
 border-radius: 10px;
 &:hover{
@@ -21,9 +21,10 @@ function App() {
   return (
     <>
 
-      <Naina>
+      <Naina primary = "true">
         Click Me
       </Naina>
+      <Naina>Click me 2</Naina>
     </>
   )
 }
